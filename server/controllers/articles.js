@@ -1,4 +1,5 @@
 import * as models from '../models';
+import md from '../utils/markdown';
 
 const Article = models.Article;
 
@@ -15,7 +16,7 @@ export async function show(ctx, next) {
 export async function create(ctx, next) {
   const title = ctx.request.body.title;
   const content = ctx.request.body.content;
-  const content_html = '';
+  const content_html = md.render(content);
 
   const article = await Article.create({
     title: title,
