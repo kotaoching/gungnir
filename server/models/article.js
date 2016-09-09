@@ -1,6 +1,5 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var article = sequelize.define('article', {
+export default function(sequelize, DataTypes) {
+  const Article = sequelize.define('Article', {
     title: DataTypes.STRING,
     content: DataTypes.TEXT,
     content_html: DataTypes.TEXT,
@@ -15,5 +14,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return article;
+
+  return Article;
 };

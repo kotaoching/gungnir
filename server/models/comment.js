@@ -1,6 +1,5 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var comment = sequelize.define('comment', {
+export default function(sequelize, DataTypes) {
+  const Comment = sequelize.define('Comment', {
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     website: DataTypes.STRING,
@@ -17,5 +16,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return comment;
+
+  return Comment;
 };
