@@ -1,3 +1,5 @@
+require('./assets/stylesheets/core.scss');
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
@@ -38,7 +40,7 @@ const router = new VueRouter({
     path: '/',
     component: Home
   }, {
-    path: '/article',
+    path: '/articles/:slug',
     component: Article
   }, {
     path: '/archive',
