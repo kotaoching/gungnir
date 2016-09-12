@@ -11,7 +11,10 @@ import apiRoute from './routes/api';
 
 const app = new Koa();
 
-app.use(convert(session(app)));
+app.keys = ['some secret keys'];
+app.use(convert(session({
+  key: 'gungnir:sess'
+}, app)));
 app.use(convert(bodyParser()));
 app.use(json());
 

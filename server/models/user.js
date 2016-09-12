@@ -12,26 +12,13 @@ export default function(sequelize, DataTypes) {
       associate: function(models) {
         // associations can be defined here
       },
+
       createPasswordHash: function(password, saltRounds) {
         return bcrypt.hashSync(password, 10);
       },
-      auth: async function(account, password) {
-        let user;
-        if (account.indexOf('@') != -1) {
-          user = await this.find({
-            where: {
-              email: account
-            }
-          });
-        } else {
-          user = await this.find({
-            where: {
-              username: account
-            }
-          });
-        }
-
-        return bcrypt.compareSync(password, user.password_hash);
+      
+      checkPassword: async function(password, password_hash) {
+        return bcrypt.compareSync(password, password_hash);
       }
     }
   });

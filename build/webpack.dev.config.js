@@ -6,7 +6,11 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = merge(baseWebpackConfig, {
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/api/*': 'http://localhost:8081',
+      '/account/*': 'http://localhost:8081'
+    }
   },
   devtool: '#source-map',
   plugins: [
