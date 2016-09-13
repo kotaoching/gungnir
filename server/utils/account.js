@@ -8,7 +8,7 @@ export async function requireAuth(ctx, next) {
       status: 401,
       message: 'Unauthorized',
       description: 'User require'
-    }
+    };
 
     return;
   }

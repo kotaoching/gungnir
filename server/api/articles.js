@@ -2,15 +2,22 @@ import * as models from '../models';
 import md from '../utils/markdown';
 
 const Article = models.Article;
+const User = models.User;
 
 export async function list(ctx, next) {
   const page = parseInt(ctx.params.page) || 1;
   const pageNumber = 8;
 
   const articles = await Article.findAndCountAll({
+    attributes: ['id', 'title', 'slug', 'content_html', 'comments_count', 'created_at', 'updated_at'],
     where: {
       is_publish: true
     },
+    include: [{
+      model: User,
+      as: 'author',
+      attributes: ['id', 'username']
+    }],
     offset: pageNumber * (page - 1),
     limit: pageNumber,
     order: [
@@ -19,22 +26,31 @@ export async function list(ctx, next) {
   });
 
   ctx.body = {
-    data: articles
-  }
+    total: articles.count,
+    page: page,
+    number: pageNumber,
+    data: articles.rows
+  };
 }
 
 export async function show(ctx, next) {
   const slug = ctx.params.slug;
   const article = await Article.findOne({
+    attributes: ['id', 'title', 'slug', 'content_html', 'comments_count', 'created_at', 'updated_at'],
     where: {
       slug: slug
-    }
+    },
+    include: [{
+      model: User,
+      as: 'author',
+      attributes: ['id', 'username']
+    }]
   });
 
   if (article) {
     ctx.body = {
       data: article
-    }
+    };
   } else {
     ctx.status = 404;
     ctx.body = {
@@ -63,6 +79,7 @@ export async function create(ctx, next) {
 
   const slug = await Article.createSlug(title);
   const contentHtml = md.render(content);
+  const userid = ctx.session.userid;
 
   try {
     const article = await Article.create({
@@ -70,6 +87,7 @@ export async function create(ctx, next) {
       slug: slug,
       content: content,
       content_html: contentHtml,
+      user_id: userid,
       is_publish: isPublish
     });
 

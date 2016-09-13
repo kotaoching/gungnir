@@ -16,11 +16,10 @@ function register(app) {
     .get('/articles', articles.list)
     .get('/articles/page/:page', articles.list)
     .get('/articles/:slug', articles.show)
-    .post('/articles', requireAuth, articles.create)
+    .post('/articles', articles.create)
     .put('/articles', requireAuth, articles.update)
     .get('/articles/:slug/comments', comments.list)
-    .post('/comments', comments.create)
-    .put('/comments', comments.update);
+    .post('/articles/:slug/comments', comments.create);
 
   app.use(router.routes());
   app.use(router.allowedMethods());

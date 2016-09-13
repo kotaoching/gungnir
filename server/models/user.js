@@ -10,13 +10,13 @@ export default function(sequelize, DataTypes) {
     underscored: true,
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        User.hasMany(models.Article);
       },
 
       createPasswordHash: function(password, saltRounds) {
         return bcrypt.hashSync(password, 10);
       },
-      
+
       checkPassword: async function(password, password_hash) {
         return bcrypt.compareSync(password, password_hash);
       }

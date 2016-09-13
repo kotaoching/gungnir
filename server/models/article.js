@@ -6,14 +6,18 @@ export default function(sequelize, DataTypes) {
     slug: DataTypes.STRING,
     content: DataTypes.TEXT,
     content_html: DataTypes.TEXT,
+    user_id: DataTypes.INTEGER,
     comments_count: DataTypes.INTEGER,
-    is_publish: DataTypes.BOOLEAN,
+    is_publish: DataTypes.BOOLEAN
   }, {
     tableName: 'articles',
     underscored: true,
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        Article.belongsTo(models.User, {
+          foreignKey: 'user_id',
+          as: 'author'
+        });
       },
 
       createSlug: async function(title) {

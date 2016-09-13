@@ -22,6 +22,9 @@ module.exports = {
       content_html: {
         type: Sequelize.TEXT
       },
+      user_id: {
+        type: Sequelize.INTEGER
+      },
       comments_count: {
         type: Sequelize.INTEGER,
         defaultValue: 0
