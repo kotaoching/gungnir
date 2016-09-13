@@ -9,7 +9,7 @@
       </div>
       <ul class="nav">
         <li class="nav-item">
-          <router-link class="nav-link" to="/">Home</router-link>
+          <router-link class="nav-link" to="/project">Project</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="/archive">Archive</router-link>
@@ -35,15 +35,17 @@
   h1 {
     margin: 0;
     font-size: 26px;
-    text-transform: uppercase;
+    // text-transform: uppercase;
   }
 }
 
 .nav {
-  float: left;
+  margin: 0;
+  float: right;
   list-style-type: none;
 
   .nav-item {
+    margin: 0;
     float: left;
     padding: 8px 0 8px 15px;
   }

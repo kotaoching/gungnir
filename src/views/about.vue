@@ -1,11 +1,7 @@
 <template>
 <div class="main">
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 home-wrap">
-        <h3>About</h3>
-      </div>
-    </div>
+    <h2>About</h2>
   </div>
 </div>
 </template>

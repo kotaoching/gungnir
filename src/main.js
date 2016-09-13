@@ -2,16 +2,17 @@ require('./assets/stylesheets/core.scss');
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueResource from 'vue-resource';
 
 import App from './app.vue';
-import Home from './views/home.vue';
-import Article from './views/article.vue';
-import Archive from './views/archive.vue';
-import About from './views/about.vue';
+import Home from './views/Home.vue';
+import Article from './views/Article.vue';
+import Project from './views/Project.vue';
+import Archive from './views/Archive.vue';
+import About from './views/About.vue';
+import CreateArticle from './views/CreateArticle.vue';
+import EditArticle from './views/EditArticle.vue';
 
 Vue.use(VueRouter);
-Vue.use(VueResource);
 
 const scrollBehavior = (to, from, savedPosition) => {
   if (savedPosition) {
@@ -40,11 +41,20 @@ const router = new VueRouter({
     path: '/',
     component: Home
   }, {
+    path: '/articles/create',
+    component: CreateArticle
+  }, {
     path: '/articles/:slug',
     component: Article
   }, {
+    path: '/articles/:slug/edit',
+    component: EditArticle
+  }, {
     path: '/archive',
     component: Archive
+  }, {
+    path: '/project',
+    component: Project
   }, {
     path: '/about',
     component: About
