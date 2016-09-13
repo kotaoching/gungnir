@@ -23,6 +23,7 @@
   "homepage": "https://github.com/da07ng/gungnir#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "highlight.js": "^9.6.0",
     "isomorphic-fetch": "^2.2.1",
     "koa": "^2.0.0-alpha.7",
     "koa-bodyparser": "^3.2.0",
@@ -37,7 +38,6 @@
     "sequelize-cli": "^2.4.0",
     "vue": "^2.0.0-rc.5",
     "vue-loader": "^9.4.2",
-    "vue-resource": "^0.9.3",
     "vue-router": "^2.0.0-rc.4"
   },
   "devDependencies": {
