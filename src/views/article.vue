@@ -1,42 +1,17 @@
 <template>
-<div class="main">
+<div class="article-view">
   <div class="container">
     <div class="article-thorough">
       <h2 class="title">{{article.title}}</h2>
       <div class="content" v-html="article.content_html"></div>
     </div>
-    <div v-if="!commentsFetching">
-      <div class="article-comment">
-        <form class="comment-form">
-          <div class="form-user ">
-            <div class="form-item form-input">
-              <input type="text" name="username" title="昵称" placeholder="昵称" v-model="newComment.username">
-            </div>
-            <div class="form-item form-input">
-              <input type="text" name="email" title="邮箱" placeholder="邮箱" v-model="newComment.email">
-            </div>
-            <div class="form-item form-input">
-              <input type="text" name="website" title="网站" placeholder="网站" v-model="newComment.website">
-            </div>
-          </div>
-          <div class="form-content">
-            <textarea class="form-textarea content" name="content" rows="2" title="评论内容" placeholder="评论内容" v-model="newComment.content"></textarea>
-          </div>
-          <button class="button" v-on:click="addComment">发表评论</button>
-        </form>
-        <div class="comment-list">
-          <div class="comment" v-for="comment in comments" :key="comment.id">
-            <span class="comment-avatar">
-            </span>
-            <div class="comment-body">
-              <div class="meta">
-                <a :href="comment.website">{{comment.username}}</a>
-              </div>
-              <div class="content">{{comment.content}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="article-comment" v-if="!commentsFetching">
+      <comment-form :article="article"></comment-form>
+      <ul class="comment-list" v-if="comments.length">
+        <template v-for="comment in comments" :key="comment.id">
+          <comment-item :comment="comment"></comment-item>
+        </template>
+      </ul>
     </div>
   </div>
 </div>
@@ -46,7 +21,9 @@
 </style>
 
 <script>
-import { getArticleBySlug, getComments, addComment } from '../api';
+import { getArticleBySlug, getComments } from '../api';
+import CommentItem from '../components/CommentItem.vue';
+import CommentForm from '../components/CommentForm.vue';
 
 export default {
   data() {
@@ -57,24 +34,15 @@ export default {
         title: '',
         content_html: ''
       },
-      comments: [],
-      newComment: {
-        username: '',
-        email: '',
-        website: '',
-        content: ''
-      }
+      comments: []
     }
   },
-
   created() {
     this.fetchData()
   },
-
   watch: {
     '$route': 'fetchData'
   },
-
   methods: {
     fetchData() {
       var that = this;
@@ -102,27 +70,11 @@ export default {
       }, error => {
         console.log(error);
       });
-    },
-
-    addComment(event) {
-      event.preventDefault();
-      const username = this.newComment.username.trim();
-      const email = this.newComment.email.trim();
-      const website = this.newComment.website.trim();
-      const content = this.newComment.content.trim();
-      const articleid = this.article.id;
-      const data = `username=${username}&email=${email}&website=${website}&content=${content}&articleid=${articleid}`;
-
-      if (username && content) {
-        addComment(this.$route.params.slug, data).then(response => {
-          if (response.ok) {
-            response.json().then(json => console.log(json));
-          }
-        }, error => {
-          console.log(error);
-        });
-      }
     }
+  },
+  components: {
+    CommentItem,
+    CommentForm
   }
 }
 </script>

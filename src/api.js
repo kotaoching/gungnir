@@ -16,7 +16,7 @@ export function addComment(slug, data) {
   return fetch(`/api/articles/${slug}/comments`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json'
     },
     body: data
   });
@@ -26,7 +26,7 @@ export function addArticle(data) {
   return fetch('/api/articles', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json'
     },
     body: data
   });

@@ -1,15 +1,10 @@
 <template>
-<div class="main">
+<div class="home-view">
   <div class="container">
-    <div class="article-list">
-      <div class="article" v-for="item in articles" :key="item.id">
-        <h2 class="title">
-          <router-link :to="`/articles/${item.slug}`">{{item.title}}</router-link>
-        </h2>
-        <div class="content">
-          <div v-html="item.content_html"></div>
-        </div>
-      </div>
+    <div class="article-list" v-if="articles.length">
+      <template v-for="article in articles" :key="article.id">
+        <article-item :article="article"></article-item>
+      </template>
     </div>
   </div>
 </div>
@@ -20,6 +15,7 @@
 
 <script>
 import { getArticles } from '../api';
+import ArticleItem from '../components/ArticleItem.vue';
 
 export default {
   data() {
@@ -27,15 +23,12 @@ export default {
       articles: []
     }
   },
-
   created() {
     this.fetchData()
   },
-
   watch: {
     '$route': 'fetchData'
   },
-
   methods: {
     fetchData() {
       var that = this;
@@ -49,6 +42,9 @@ export default {
         console.log(error);
       });
     }
+  },
+  components: {
+    ArticleItem
   }
 }
 </script>

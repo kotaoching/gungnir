@@ -1,5 +1,5 @@
 <template>
-<div class="main">
+<div class="archive-view">
   <div class="container">
     <h2>Archive</h2>
   </div>

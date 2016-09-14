@@ -64,7 +64,7 @@ export async function show(ctx, next) {
 export async function create(ctx, next) {
   const title = ctx.request.body.title;
   const content = ctx.request.body.content;
-  const isPublish = ctx.request.body.is_publish;
+  const publish = ctx.request.body.publish;
 
   if (!title || !content) {
     ctx.status = 400;
@@ -88,14 +88,15 @@ export async function create(ctx, next) {
       content: content,
       content_html: contentHtml,
       user_id: userid,
-      is_publish: isPublish
+      is_publish: publish
     });
 
     ctx.status = 200;
     ctx.body = {
       status: 200,
       message: 'OK',
-      description: 'The article create success'
+      description: 'The article create success',
+      data: article
     };
   } catch (err) {
     ctx.status = 500;
