@@ -3,18 +3,18 @@
   <div class="form-field form-title">
     <input type="text" name="title" placeholder="标题" v-model="article.title">
   </div>
-  <div class="form-field form-link">
+  <div class="form-field form-slug">
     <input type="text" name="slug" placeholder="链接" v-model="article.slug">
   </div>
   <div class="form-field form-content">
-    <textarea class="form-textarea content" name="content" rows="2" title="文章正文" placeholder="文章正文" v-model="article.content"></textarea>
+    <textarea class="form-textarea content" name="content" title="文章正文" placeholder="文章正文" v-model="article.content"></textarea>
   </div>
-  <div class="form-field form-publish">
+  <div class="form-check form-publish">
     <input type="checkbox" v-model="article.publish" v-bind:true-value="true" v-bind:false-value="false">
-    <label for="checkbox">发布文章</label>
+    <label for="checkbox">是否发布</label>
   </div>
   <div class="form-submit">
-    <button class="button">发表评论</button>
+    <button class="button">创建</button>
   </div>
 </form>
 </template>

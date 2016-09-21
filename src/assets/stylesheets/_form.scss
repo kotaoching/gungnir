@@ -1,0 +1,30 @@
+.form-field {
+  padding: 10px 0;
+}
+
+.form-field input,
+.form-field textarea {
+  display: block;
+  padding: 6px 2px;
+  border: 1px solid #ddd;
+  width: 100%;
+  color: #454545;
+  background-color: transparent;
+  transition: all 0.1s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #acacac;
+}
+
+.form-check {
+  display: block;
+  color: #999;
+  padding: 10px 0;
+}
+
+.form-submit {
+  padding-top: 20px;
+}

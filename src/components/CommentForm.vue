@@ -1,20 +1,20 @@
 <template>
 <form class="comment-form" v-on:submit="formSubmit">
-  <div class="form-user ">
-    <div class="form-item form-input">
-      <input type="text" name="username" title="昵称" placeholder="昵称" v-model="comment.username">
-    </div>
-    <div class="form-item form-input">
-      <input type="text" name="email" title="邮箱" placeholder="邮箱" v-model="comment.email">
-    </div>
-    <div class="form-item form-input">
-      <input type="text" name="website" title="网站" placeholder="网站" v-model="comment.website">
-    </div>
+  <div class="form-field form-username">
+    <input type="text" name="username" title="昵称" placeholder="昵称" v-model="comment.username">
   </div>
-  <div class="form-content">
-    <textarea class="form-textarea content" name="content" rows="2" title="评论内容" placeholder="评论内容" v-model="comment.content"></textarea>
+  <div class="form-field form-email">
+    <input type="text" name="email" title="邮箱" placeholder="邮箱" v-model="comment.email">
   </div>
-  <button class="button">发表评论</button>
+  <div class="form-field form-website">
+    <input type="text" name="website" title="网站" placeholder="网站" v-model="comment.website">
+  </div>
+  <div class="form-field form-content">
+    <textarea class="form-textarea content" name="content" title="评论内容" placeholder="评论内容" v-model="comment.content"></textarea>
+  </div>
+  <div class="form-submit">
+    <button class="button">评论</button>
+  </div>
 </form>
 </template>
 
