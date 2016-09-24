@@ -1,15 +1,15 @@
-import 'isomorphic-fetch';
+import 'isomorphic-fetch'
 
 export function getArticles() {
-  return fetch('api/articles');
+  return fetch('api/articles')
 }
 
 export function getArticleBySlug(slug) {
-  return fetch(`/api/articles/${slug}`);
+  return fetch(`/api/articles/${slug}`)
 }
 
 export function getComments(slug) {
-  return fetch(`/api/articles/${slug}/comments`);
+  return fetch(`/api/articles/${slug}/comments`)
 }
 
 export function addComment(slug, data) {
@@ -19,7 +19,7 @@ export function addComment(slug, data) {
       'Content-Type': 'application/json'
     },
     body: data
-  });
+  })
 }
 
 export function addArticle(data) {
@@ -29,5 +29,5 @@ export function addArticle(data) {
       'Content-Type': 'application/json'
     },
     body: data
-  });
+  })
 }

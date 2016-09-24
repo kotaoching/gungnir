@@ -1,5 +1,5 @@
-import MarkdownIt from 'markdown-it';
-import hljs from 'highlight.js';
+import MarkdownIt from 'markdown-it'
+import hljs from 'highlight.js'
 
 const md = new MarkdownIt({
   html: false,
@@ -14,12 +14,12 @@ const md = new MarkdownIt({
       try {
         return '<pre class="hljs"><code>' +
           hljs.highlight(lang, str, true).value +
-          '</code></pre>';
+          '</code></pre>'
       } catch (__) {}
     }
 
-    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>'
   }
-});
+})
 
-export default md;
+export default md

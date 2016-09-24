@@ -23,7 +23,7 @@
 </style>
 
 <script>
-import { addArticle } from '../api';
+import { addArticle } from '../api'
 
 export default {
   props: {
@@ -36,20 +36,20 @@ export default {
           slug: '',
           content: '',
           publish: false
-        };
+        }
       }
     }
   },
   methods: {
     formSubmit(event) {
-      event.preventDefault();
-      this.addArticle();
+      event.preventDefault()
+      this.addArticle()
     },
     addArticle() {
-      const title = this.article.title.trim();
-      const slug = this.article.slug.trim();
-      const content = this.article.content.trim();
-      const publish = this.article.publish;
+      const title = this.article.title.trim()
+      const slug = this.article.slug.trim()
+      const content = this.article.content.trim()
+      const publish = this.article.publish
 
       if (title && content) {
         const data = JSON.stringify({
@@ -57,17 +57,17 @@ export default {
           slug: slug,
           content: content,
           publish: publish
-        });
+        })
 
         addArticle(data).then(response => {
           if (response.ok) {
             response.json().then(json => {
-              console.log(json);
-            });
+              console.log(json)
+            })
           }
         }, error => {
-          console.log(error);
-        });
+          console.log(error)
+        })
       }
     }
   }

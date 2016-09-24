@@ -1,12 +1,12 @@
-import * as models from '../models';
-import md from '../utils/markdown';
+import * as models from '../models'
+import md from '../utils/markdown'
 
-const Article = models.Article;
-const User = models.User;
+const Article = models.Article
+const User = models.User
 
 export async function list(ctx, next) {
-  const page = parseInt(ctx.params.page) || 1;
-  const pageNumber = 8;
+  const page = parseInt(ctx.query.page) || 1
+  const pageNumber = 8
 
   const articles = await Article.findAndCountAll({
     attributes: ['id', 'title', 'slug', 'content_html', 'comments_count', 'created_at', 'updated_at'],
@@ -23,18 +23,18 @@ export async function list(ctx, next) {
     order: [
       ['created_at', 'DESC']
     ]
-  });
+  })
 
   ctx.body = {
     total: articles.count,
     page: page,
     number: pageNumber,
     data: articles.rows
-  };
+  }
 }
 
 export async function show(ctx, next) {
-  const slug = ctx.params.slug;
+  const slug = ctx.params.slug
   const article = await Article.findOne({
     attributes: ['id', 'title', 'slug', 'content_html', 'comments_count', 'created_at', 'updated_at'],
     where: {
@@ -45,41 +45,41 @@ export async function show(ctx, next) {
       as: 'author',
       attributes: ['id', 'username']
     }]
-  });
+  })
 
   if (article) {
     ctx.body = {
       data: article
-    };
+    }
   } else {
-    ctx.status = 404;
+    ctx.status = 404
     ctx.body = {
       status: 404,
       message: 'Not Found',
       description: 'Article don\'t exists'
-    };
+    }
   }
 }
 
 export async function create(ctx, next) {
-  const title = ctx.request.body.title;
-  const content = ctx.request.body.content;
-  const publish = ctx.request.body.publish;
+  const title = ctx.request.body.title
+  const content = ctx.request.body.content
+  const publish = ctx.request.body.publish
 
   if (!title || !content) {
-    ctx.status = 400;
+    ctx.status = 400
     ctx.body = {
       status: 400,
       message: 'Bad Request',
       description: 'The title and content is required, and must be not void'
-    };
+    }
 
-    return;
+    return
   }
 
-  const slug = await Article.createSlug(title);
-  const contentHtml = md.render(content);
-  const userid = ctx.session.userid;
+  const slug = await Article.createSlug(title)
+  const contentHtml = md.render(content)
+  const userid = ctx.session.userid
 
   try {
     const article = await Article.create({
@@ -89,31 +89,31 @@ export async function create(ctx, next) {
       content_html: contentHtml,
       user_id: userid,
       is_publish: publish
-    });
+    })
 
-    ctx.status = 200;
+    ctx.status = 200
     ctx.body = {
       status: 200,
       message: 'OK',
       description: 'The article create success',
       data: article
-    };
+    }
   } catch (err) {
-    ctx.status = 500;
+    ctx.status = 500
     ctx.body = {
       status: 500,
       message: 'Internal Server Error',
       description: 'Failed to create the article'
-    };
+    }
   }
 }
 
 export async function update(ctx, next) {
-  const articleid = ctx.request.body.id;
-  const title = ctx.request.body.title;
-  const content = ctx.request.body.content;
-  const contentHtml = md.render(content);
-  const isPublish = ctx.request.body.is_publish;
+  const articleid = ctx.request.body.id
+  const title = ctx.request.body.title
+  const content = ctx.request.body.content
+  const contentHtml = md.render(content)
+  const isPublish = ctx.request.body.is_publish
 
   try {
     const article = await Article.update({
@@ -125,20 +125,20 @@ export async function update(ctx, next) {
       where: {
         id: articleid
       }
-    });
+    })
 
-    ctx.status = 200;
+    ctx.status = 200
     ctx.body = {
       status: 200,
       message: 'OK',
       description: 'The article create success'
-    };
+    }
   } catch (err) {
-    ctx.status = 500;
+    ctx.status = 500
     ctx.body = {
       status: 500,
       message: 'Internal Server Error',
       description: 'Failed to create the article'
-    };
+    }
   }
 }

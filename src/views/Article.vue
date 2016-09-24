@@ -21,9 +21,9 @@
 </style>
 
 <script>
-import { getArticleBySlug, getComments } from '../api';
-import CommentItem from '../components/CommentItem.vue';
-import CommentForm from '../components/CommentForm.vue';
+import { getArticleBySlug, getComments } from '../api'
+import CommentItem from '../components/CommentItem.vue'
+import CommentForm from '../components/CommentForm.vue'
 
 export default {
   data() {
@@ -45,31 +45,31 @@ export default {
   },
   methods: {
     fetchData() {
-      var that = this;
-      this.articleFetching = true;
-      this.commentsFetching = true;
+      var that = this
+      this.articleFetching = true
+      this.commentsFetching = true
 
       getArticleBySlug(this.$route.params.slug).then(response => {
         if (response.ok) {
           response.json().then(json => {
-            that.article = json.data;
-            this.articleFetching = false;
-          });
+            that.article = json.data
+            this.articleFetching = false
+          })
         }
       }, error => {
-        console.log(error);
-      });
+        console.log(error)
+      })
 
       getComments(this.$route.params.slug).then(response => {
         if (response.ok) {
           response.json().then(json => {
-            that.comments = json.data;
-            this.commentsFetching = false;
-          });
+            that.comments = json.data
+            this.commentsFetching = false
+          })
         }
       }, error => {
-        console.log(error);
-      });
+        console.log(error)
+      })
     }
   },
   components: {

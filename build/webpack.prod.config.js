@@ -1,9 +1,9 @@
-var webpack = require('webpack');
-var merge = require('webpack-merge');
-var baseWebpackConfig = require('./webpack.base.config');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var path = require('path');
+var webpack = require('webpack')
+var merge = require('webpack-merge')
+var baseWebpackConfig = require('./webpack.base.config')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var path = require('path')
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#source-map',
@@ -43,4 +43,4 @@ module.exports = merge(baseWebpackConfig, {
       inject: true
     })
   ]
-});
+})

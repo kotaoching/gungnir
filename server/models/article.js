@@ -1,4 +1,4 @@
-import pinyin from 'pinyin';
+import pinyin from 'pinyin'
 
 export default function(sequelize, DataTypes) {
   const Article = sequelize.define('Article', {
@@ -17,36 +17,36 @@ export default function(sequelize, DataTypes) {
         Article.belongsTo(models.User, {
           foreignKey: 'user_id',
           as: 'author'
-        });
+        })
       },
 
       createSlug: async function(title) {
         const slug = pinyin(title, {
           style: pinyin.STYLE_NORMAL
-        }).join('-');
+        }).join('-')
 
-        return await this.validateSlug(slug, slug);
+        return await this.validateSlug(slug, slug)
       },
 
       validateSlug: async function(slug, newSlug) {
-        var validSlug = newSlug;
+        var validSlug = newSlug
         const articlesLength = await this.count({
           where: {
             slug: validSlug
           }
-        });
+        })
 
         if (articlesLength !== 0) {
-          const postfix = parseInt(validSlug.replace(slug + '-','')) || 0;
-          validSlug = slug + '-' + (postfix + articlesLength);
+          const postfix = parseInt(validSlug.replace(slug + '-','')) || 0
+          validSlug = slug + '-' + (postfix + articlesLength)
 
-          return await this.validateSlug(slug, validSlug);
+          return await this.validateSlug(slug, validSlug)
         } else {
-          return validSlug;
+          return validSlug
         }
       }
     }
-  });
+  })
 
-  return Article;
-};
+  return Article
+}

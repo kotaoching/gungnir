@@ -1,37 +1,37 @@
-require('./assets/stylesheets/core.scss');
+require('./assets/stylesheets/core.scss')
 
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-import App from './app.vue';
-import Home from './views/Home.vue';
-import Article from './views/Article.vue';
-import Project from './views/Project.vue';
-import Archive from './views/Archive.vue';
-import About from './views/About.vue';
-import CreateArticle from './views/CreateArticle.vue';
-import EditArticle from './views/EditArticle.vue';
+import App from './app.vue'
+import Home from './views/Home.vue'
+import Article from './views/Article.vue'
+import Project from './views/Project.vue'
+import Archive from './views/Archive.vue'
+import About from './views/About.vue'
+import CreateArticle from './views/CreateArticle.vue'
+import EditArticle from './views/EditArticle.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const scrollBehavior = (to, from, savedPosition) => {
   if (savedPosition) {
-    return savedPosition;
+    return savedPosition
   } else {
-    const position = {};
+    const position = {}
 
     if (to.hash) {
-      position.selector = to.hash;
+      position.selector = to.hash
     }
 
     if (to.matched.some(m => m.meta.scrollToTop)) {
-      position.x = 0;
-      position.y = 0;
+      position.x = 0
+      position.y = 0
     }
 
-    return position;
+    return position
   }
-};
+}
 
 const router = new VueRouter({
   mode: 'history',
@@ -59,8 +59,8 @@ const router = new VueRouter({
     path: '/about',
     component: About
   }]
-});
+})
 
 new Vue(Vue.util.extend({
   router
-}, App)).$mount('#app');
+}, App)).$mount('#app')

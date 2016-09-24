@@ -11,7 +11,7 @@
 </style>
 
 <script>
-import ArticleForm from '../components/ArticleForm.vue';
+import ArticleForm from '../components/ArticleForm.vue'
 
 export default {
   components: {

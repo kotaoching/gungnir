@@ -14,7 +14,7 @@ export default function(sequelize, DataTypes) {
       associate: function(models) {
       }
     }
-  });
+  })
 
-  return Comment;
-};
+  return Comment
+}

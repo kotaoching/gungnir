@@ -14,8 +14,8 @@
 </style>
 
 <script>
-import { getArticles } from '../api';
-import ArticleItem from '../components/ArticleItem.vue';
+import { getArticles } from '../api'
+import ArticleItem from '../components/ArticleItem.vue'
 
 export default {
   data() {
@@ -31,16 +31,16 @@ export default {
   },
   methods: {
     fetchData() {
-      var that = this;
+      var that = this
       getArticles().then(response => {
         if (response.ok) {
           response.json().then(json => {
-            that.articles = json.data;
-          });
+            that.articles = json.data
+          })
         }
       }, error => {
-        console.log(error);
-      });
+        console.log(error)
+      })
     }
   },
   components: {

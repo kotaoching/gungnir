@@ -22,7 +22,7 @@
 </style>
 
 <script>
-import { addComment } from '../api';
+import { addComment } from '../api'
 
 export default {
   props: ['article'],
@@ -38,15 +38,15 @@ export default {
   },
   methods: {
     formSubmit(event) {
-      event.preventDefault();
-      this.addComment();
+      event.preventDefault()
+      this.addComment()
     },
     addComment() {
-      const username = this.comment.username.trim();
-      const email = this.comment.email.trim();
-      const website = this.comment.website.trim();
-      const content = this.comment.content.trim();
-      const articleid = this.article.id;
+      const username = this.comment.username.trim()
+      const email = this.comment.email.trim()
+      const website = this.comment.website.trim()
+      const content = this.comment.content.trim()
+      const articleid = this.article.id
 
       if (username && content) {
         const data = JSON.stringify({
@@ -55,17 +55,17 @@ export default {
           website: website,
           content: content,
           articleid: articleid
-        });
+        })
 
         addComment(this.$route.params.slug, data).then(response => {
           if (response.ok) {
             response.json().then(json => {
-              console.log(json);
-            });
+              console.log(json)
+            })
           }
         }, error => {
-          console.log(error);
-        });
+          console.log(error)
+        })
       }
     }
   }
