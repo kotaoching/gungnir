@@ -1,8 +1,8 @@
 import Router from 'koa-router'
 
-import * as users from '../api/users'
-import * as articles from '../api/articles'
-import * as comments from '../api/comments'
+import * as users from '../controllers/api/users'
+import * as articles from '../controllers/api/articles'
+import * as comments from '../controllers/api/comments'
 
 import { requireAuth } from '../utils/account'
 

@@ -1,5 +1,5 @@
-import * as models from '../models'
-import md from '../utils/markdown'
+import * as models from '../../models'
+import md from '../../utils/markdown'
 
 const Article = models.Article
 const User = models.User

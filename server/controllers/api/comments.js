@@ -1,4 +1,4 @@
-import * as models from '../models'
+import * as models from '../../models'
 
 const Comment = models.Comment
 const Article = models.Article
