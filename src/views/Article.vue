@@ -56,8 +56,8 @@ export default {
             this.articleFetching = false
           })
         }
-      }, error => {
-        console.log(error)
+      }).catch(err => {
+        console.log(err)
       })
 
       getComments(this.$route.params.slug).then(response => {
@@ -67,8 +67,8 @@ export default {
             this.commentsFetching = false
           })
         }
-      }, error => {
-        console.log(error)
+      }).catch(err => {
+        console.log(err)
       })
     }
   },

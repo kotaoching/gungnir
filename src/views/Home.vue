@@ -38,8 +38,8 @@ export default {
             that.articles = json.data
           })
         }
-      }, error => {
-        console.log(error)
+      }).catch(err => {
+        console.log(err)
       })
     }
   },
