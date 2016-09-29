@@ -37,7 +37,6 @@
     "sequelize": "^3.24.2",
     "sequelize-cli": "^2.4.0",
     "vue": "^2.0.0-rc.5",
-    "vue-loader": "^9.4.2",
     "vue-router": "^2.0.0-rc.4"
   },
   "devDependencies": {
