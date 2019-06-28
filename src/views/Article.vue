@@ -8,9 +8,7 @@
     <div class="article-comment" v-if="!commentsFetching">
       <comment-form :article="article"></comment-form>
       <ul class="comment-list" v-if="comments.length">
-        <template v-for="comment in comments" :key="comment.id">
-          <comment-item :comment="comment"></comment-item>
-        </template>
+        <comment-item :comment="comment" v-for="comment in comments" :key="comment.id"></comment-item>
       </ul>
     </div>
   </div>

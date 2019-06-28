@@ -2,9 +2,7 @@
 <div class="home-view">
   <div class="container">
     <div class="article-list" v-if="articles.length">
-      <template v-for="article in articles" :key="article.id">
-        <article-item :article="article"></article-item>
-      </template>
+      <article-item :article="article" v-for="article in articles" :key="article.id"></article-item>
     </div>
   </div>
 </div>

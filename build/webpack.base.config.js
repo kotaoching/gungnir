@@ -1,35 +1,62 @@
-var webpack = require('webpack')
-var vue = require("vue-loader")
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+const webpack = require('webpack');
+const path = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
     app: './src/main.js'
   },
   output: {
-    path: './dist',
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/static/',
     filename: 'app.js'
   },
   module: {
-    loaders: [{
-      test: /\.vue$/,
-      loader: 'vue'
-    }, {
-      test: /\.js$/,
-      loader: 'babel',
-      exclude: /node_modules/
-    }, {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
-    }, {
-      test: /\.(png|jpg|gif|svg)$/,
-      loader: 'file?name=[name].[ext]?[hash]'
-    }]
+    rules: [
+      {
+        test: /\.vue$/,
+        use: [
+          {
+            loader: 'vue-loader',
+            options: {
+              loaders: {
+                js: 'babel-loader'
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            }
+          }
+        ]
+      }
+    ]
   },
-  vue: {
-    loaders: {
-      sass: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
-    }
-  }
-}
+  plugins: [
+    new VueLoaderPlugin()
+  ]
+};

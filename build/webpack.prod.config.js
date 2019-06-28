@@ -1,21 +1,18 @@
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.config')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var path = require('path')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var webpack = require('webpack');
+var merge = require('webpack-merge');
+var baseWebpackConfig = require('./webpack.base.config');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path');
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#source-map',
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: 'production'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
       }
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -23,14 +20,12 @@ module.exports = merge(baseWebpackConfig, {
     new ExtractTextPlugin('app.css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module, count) {
+      minChunks: function(module, count) {
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
-        )
+          module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0
+        );
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
@@ -42,5 +37,17 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     })
-  ]
-})
+  ],
+
+  optimization: {
+    minimize: true,
+
+    minimizer: [
+      new UglifyJsPlugin({
+        compress: {
+          warnings: false
+        }
+      })
+    ]
+  }
+});
